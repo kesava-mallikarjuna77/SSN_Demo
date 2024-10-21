@@ -1,0 +1,14 @@
+EventPublisherService: Manages the event stream using Sinks.Many and provides methods to publish and subscribe to events.
+
+CheckInController: Endpoint for the check-in service that publishes events when invoked.
+
+StreamMessagesController: Streams events to clients using Flux from Reactor.
+
+This setup uses WebFlux and Reactor to handle the streaming of events in a reactive, non-blocking manner, allowing multiple clients to connect and receive updates in real-time.
+
+
+
+localhost:8080/check-in
+body pass some text: my appointmnet checked-in asjdhks 
+
+localhost:8080/streamMessages
