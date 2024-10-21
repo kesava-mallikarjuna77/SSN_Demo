@@ -1,11 +1,47 @@
-EventPublisherService: Manages the event stream using Sinks.Many and provides methods to publish and subscribe to events.
+You
+give me the explaniation more clearly
+Copilot
+Let's break it down step-by-step:
 
-CheckInController: Endpoint for the check-in service that publishes events when invoked.
+Overall Idea
+You have two services:
 
-StreamMessagesController: Streams events to clients using Flux from Reactor.
+Check-In Service: When a client checks in, this service sends a notification.
 
-This setup uses WebFlux and Reactor to handle the streaming of events in a reactive, non-blocking manner, allowing multiple clients to connect and receive updates in real-time.
+StreamMessages Service: This service streams these notifications to clients using Server-Sent Events (SSE).
 
+Technologies Used
+Spring WebFlux: For handling asynchronous, non-blocking requests.
+
+Reactor: For managing reactive streams of data.
+
+Check-In Service
+Dependencies: Add Spring Boot Starter WebFlux in your pom.xml.
+
+Controller: A REST endpoint that clients call to check in and send notifications to the StreamMessages Service.
+Explanation
+Dependencies: Ensure your project includes Spring WebFlux and Reactor for reactive programming.
+
+Check-In Service:
+
+Defines a REST controller (CheckInController).
+
+On check-in, it sends a message to the EventPublisherService.
+
+EventPublisherService publishes this event using Sinks.Many.
+
+StreamMessages Service:
+
+Another REST controller (StreamMessagesController) that subscribes to the EventPublisherService.
+
+Uses Flux<String> to stream events to clients with SSE.
+
+How It Works
+When a Client Checks In: The Check-In Service receives the message and publishes it through the EventPublisherService.
+
+Streaming to Clients: Clients connected to the StreamMessages Service receive the streamed events in real-time via SSE.
+
+This method allows you to handle real-time updates between services efficiently without requiring additional message brokers.
 
 
 localhost:8080/check-in
