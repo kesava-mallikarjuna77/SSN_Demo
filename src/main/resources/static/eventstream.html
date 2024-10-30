@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Server-Sent Events Example</title>
+</head>
+<body>
+    <h1>Server-Sent Events</h1>
+    <div id="result"></div>
+
+    <script>
+       if (typeof(EventSource) !== "undefined") {
+            var source = new EventSource("https://warm-dancers-call.loca.lt/streamMessages");
+		//source.onopen = () => console.log('Connection opened.');
+            source.onmessage = function(event) {
+                console.log('result',event.data);
+                document.getElementById("result").innerHTML += event.data + "<br>";
+                //sendEvent();
+            };
+        } else {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+        }
+        function sendEvent() {
+            const event = new CustomEvent('htmlEvent', { detail: 'Event triggered from HTML' });
+            window.parent.dispatchEvent(event); // Use window.parent to ensure event bubbles up
+        }
+    </script>
+</body>
+</html>

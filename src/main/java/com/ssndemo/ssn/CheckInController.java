@@ -26,7 +26,7 @@ public class CheckInController {
     }
     
     @PostMapping
-    @CrossOrigin(origins = "*")
+    //@CrossOrigin(origins = "*")
     public ResponseEntity<String> checkIn(@RequestBody String message) {
         eventPublisherService.publishEvent(message);
         return ResponseEntity.ok("Check-in successful and event published.");

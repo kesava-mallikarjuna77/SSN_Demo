@@ -20,7 +20,7 @@ public class StreamMessagesController {
     }
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-     @CrossOrigin(origins = "*")
+    //@CrossOrigin(origins = "*") // Allow all origins and methods
     public Flux<String> streamMessages() {
         return eventPublisherService.getEvents();
     }
